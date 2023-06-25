@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 
@@ -6,14 +5,17 @@ import AddCard from "./AddCard";
 import ColumnHeader from "./ColumnHeader";
 import Card from "./Card";
 
-export default function Column({ status }) {
-  const [tasks, setTasks] = useState([
-    { title: "Create a reusable button component", status: "To-Do" },
-  ]);
+export default function Column({
+  status,
+  tasks,
+  handleDropCard,
+  handleDragCard,
+  handleAddTask,
+}) {
   const columnTasks = tasks.filter((t) => t.status === status);
 
-  function handleAddTask(title) {
-    setTasks([...tasks, { title, status }]);
+  function handleDragOver(e) {
+    e.preventDefault();
   }
 
   return (
@@ -26,13 +28,17 @@ export default function Column({ status }) {
     >
       <ColumnHeader status={status} />
       <Divider />
-      <Box sx={{ height: columnTasks.length ? "auto" : 60, padding: 2 }}>
+      <Box
+        onDrop={(event) => handleDropCard(event, status)}
+        onDragOver={handleDragOver}
+        sx={{ height: columnTasks.length ? "auto" : 60, padding: 2 }}
+      >
         {columnTasks.map((task) => (
-          <Card key={task.title} {...task} />
+          <Card key={task.id} handleDragCard={handleDragCard} {...task} />
         ))}
       </Box>
       <Divider />
-      <AddCard handleAddTask={handleAddTask} />
+      <AddCard status={status} handleAddTask={handleAddTask} />
     </Box>
   );
 }

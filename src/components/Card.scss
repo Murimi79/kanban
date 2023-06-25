@@ -4,6 +4,10 @@
   padding: 1rem;
   cursor: pointer;
 
+  &:hover {
+    background: #dfdfdf;
+  }
+
   &:not(:last-of-type) {
     margin-bottom: 1rem;
   }

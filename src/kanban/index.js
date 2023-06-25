@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Grid from "@mui/material/Grid";
 
 import Column from "../components/Column";
@@ -11,6 +12,31 @@ const columns = [
 ];
 
 export default function Kanban() {
+  const [tasks, setTasks] = useState([
+    { id: 1, title: "Create a reusable button component", status: "To-Do" },
+  ]);
+
+  function handleAddTask(title, status) {
+    setTasks([...tasks, { title, status }]);
+  }
+
+  function handleDragCard(e, taskId) {
+    e.dataTransfer.setData("taskId", taskId);
+  }
+
+  function handleDropCard(e, status) {
+    const taskId = e.dataTransfer.getData("taskId");
+    console.log(taskId, status);
+    const updatedTasks = tasks.map((t) => {
+      if (t.id === +taskId) {
+        return { ...t, status: status };
+      }
+      return t;
+    });
+    console.log(updatedTasks);
+    setTasks(updatedTasks);
+  }
+
   const noOfColumns = columns.length;
 
   return (
@@ -20,7 +46,13 @@ export default function Kanban() {
           <Grid container spacing={2}>
             {columns.map(({ status }) => (
               <Grid key={status} item sm={12 / columns.length}>
-                <Column status={status} />
+                <Column
+                  tasks={tasks}
+                  status={status}
+                  handleDragCard={handleDragCard}
+                  handleDropCard={handleDropCard}
+                  handleAddTask={handleAddTask}
+                />
               </Grid>
             ))}
           </Grid>

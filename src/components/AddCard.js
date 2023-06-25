@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-export default function AddCard({ handleAddTask }) {
+export default function AddCard({ handleAddTask, status }) {
   const [adding, setAdding] = useState(false);
   const [title, setTitle] = useState("");
   const [error, setError] = useState({
@@ -17,10 +17,12 @@ export default function AddCard({ handleAddTask }) {
   }
 
   function handleSubmit() {
-    if (!title)
+    if (!title) {
       setError({ ...error, show: true, message: "Title is required." });
+      return;
+    }
 
-    handleAddTask(title);
+    handleAddTask(title, status);
     setAdding(false);
   }
 
