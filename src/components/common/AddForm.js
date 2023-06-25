@@ -3,7 +3,12 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-export default function AddForm({ handleAdd, handleCancel, ...props }) {
+export default function AddForm({
+  handleAdd,
+  handleCancel,
+  buttonName = "Add",
+  ...props
+}) {
   return (
     <Box>
       <TextField
@@ -16,7 +21,7 @@ export default function AddForm({ handleAdd, handleCancel, ...props }) {
       />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
-          sx={{ fontWeight: "bold", alignSelf: "center" }}
+          sx={{ fontWeight: "bold", alignSelf: "center", cursor: "pointer" }}
           variant="body1"
           color="primary.main"
           onClick={handleCancel}
@@ -24,7 +29,7 @@ export default function AddForm({ handleAdd, handleCancel, ...props }) {
           Cancel
         </Typography>
         <Button variant="contained" onClick={handleAdd}>
-          Add
+          {buttonName}
         </Button>
       </Box>
     </Box>

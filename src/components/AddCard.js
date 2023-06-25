@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AddButton from "./common/AddForm";
 
-export default function AddCard({ handleAddTask, status }) {
+export default function AddCard({ handleAddTask, status, columnId }) {
   const [adding, setAdding] = useState(false);
   const [title, setTitle] = useState("");
   const [error, setError] = useState({
@@ -21,7 +21,8 @@ export default function AddCard({ handleAddTask, status }) {
       return;
     }
 
-    handleAddTask(title, status);
+    const task = { title, status, columnId };
+    handleAddTask(task);
     setAdding(false);
   }
 

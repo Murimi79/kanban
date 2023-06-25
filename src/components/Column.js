@@ -8,11 +8,13 @@ import Card from "./Card";
 export default function Column({
   status,
   tasks,
+  columnId,
   handleDropCard,
   handleDragCard,
   handleAddTask,
+  handleUpdateColumn,
 }) {
-  const columnTasks = tasks.filter((t) => t.status === status);
+  const columnTasks = tasks.filter((t) => t.columnId === columnId);
 
   function handleDragOver(e) {
     e.preventDefault();
@@ -26,10 +28,14 @@ export default function Column({
         boxShadow: `0 2px 6px rgba(0, 0, 0, 0.1)}`,
       }}
     >
-      <ColumnHeader status={status} />
+      <ColumnHeader
+        columnId={columnId}
+        status={status}
+        handleUpdateColumn={handleUpdateColumn}
+      />
       <Divider />
       <Box
-        onDrop={(event) => handleDropCard(event, status)}
+        onDrop={(event) => handleDropCard(event, { status, columnId })}
         onDragOver={handleDragOver}
         sx={{ height: columnTasks.length ? "auto" : 60, padding: 2 }}
       >
@@ -38,7 +44,11 @@ export default function Column({
         ))}
       </Box>
       <Divider />
-      <AddCard status={status} handleAddTask={handleAddTask} />
+      <AddCard
+        columnId={columnId}
+        status={status}
+        handleAddTask={handleAddTask}
+      />
     </Box>
   );
 }
