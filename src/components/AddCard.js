@@ -24,6 +24,7 @@ export default function AddCard({ handleAddTask, status, columnId }) {
     const task = { title, status, columnId };
     handleAddTask(task);
     setAdding(false);
+    setTitle("");
   }
 
   return (

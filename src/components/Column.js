@@ -13,6 +13,8 @@ export default function Column({
   handleDragCard,
   handleAddTask,
   handleUpdateColumn,
+  handleClear,
+  handleDeleteColumn,
 }) {
   const columnTasks = tasks.filter((t) => t.columnId === columnId);
 
@@ -32,6 +34,8 @@ export default function Column({
         columnId={columnId}
         status={status}
         handleUpdateColumn={handleUpdateColumn}
+        handleClear={handleClear}
+        handleDeleteColumn={handleDeleteColumn}
       />
       <Divider />
       <Box

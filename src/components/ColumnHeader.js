@@ -6,7 +6,13 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AddForm from "./common/AddForm";
 import Menu from "./common/Menu";
 
-export default function ColumnHeader({ status, handleUpdateColumn, columnId }) {
+export default function ColumnHeader({
+  status,
+  handleUpdateColumn,
+  columnId,
+  handleClear,
+  handleDeleteColumn,
+}) {
   const [editing, setEditing] = useState(false);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,11 +31,18 @@ export default function ColumnHeader({ status, handleUpdateColumn, columnId }) {
     if (option === "Rename") {
       setEditing(true);
     } else if (option === "Clear") {
+      handleClear(columnId);
     } else if (option === "Delete") {
+      handleDeleteColumn(columnId);
     }
   }
 
   function handleUpdate() {
+    if (!name) {
+      setError({ ...error, show: true, message: "Title is required." });
+      return;
+    }
+
     handleUpdateColumn({ status: name, id: columnId });
     setEditing(false);
     setOpen(false);

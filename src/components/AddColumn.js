@@ -23,6 +23,7 @@ export default function AddColumn({ handleAddColumn }) {
 
     handleAddColumn(name);
     setAdding(false);
+    setName("");
   }
 
   return (
