@@ -4,20 +4,20 @@ import Grid from "@mui/material/Grid";
 import Column from "../components/Column";
 import AddColumn from "../components/AddColumn";
 
-const columns = [
-  { status: "To-Do" },
-  { status: "In Development" },
-  { status: "Ready for QA" },
-  { status: "In Testing" },
-];
-
 export default function Kanban() {
+  const [columns, setColumns] = useState([
+    { status: "To-Do" },
+    { status: "In Development" },
+    { status: "Ready for QA" },
+    { status: "In Testing" },
+  ]);
   const [tasks, setTasks] = useState([
     { id: 1, title: "Create a reusable button component", status: "To-Do" },
   ]);
 
   function handleAddTask(title, status) {
-    setTasks([...tasks, { title, status }]);
+    const id = tasks.length + 1;
+    setTasks([...tasks, { title, status, id }]);
   }
 
   function handleDragCard(e, taskId) {
@@ -35,6 +35,10 @@ export default function Kanban() {
     });
     console.log(updatedTasks);
     setTasks(updatedTasks);
+  }
+
+  function handleAddColumn(status) {
+    setColumns([...columns, { status }]);
   }
 
   const noOfColumns = columns.length;
@@ -59,7 +63,7 @@ export default function Kanban() {
         </Grid>
         {noOfColumns < 5 ? (
           <Grid item sm={3}>
-            <AddColumn />
+            <AddColumn handleAddColumn={handleAddColumn} />
           </Grid>
         ) : null}
       </Grid>

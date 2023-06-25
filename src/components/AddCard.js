@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import AddButton from "./common/AddForm";
 
 export default function AddCard({ handleAddTask, status }) {
   const [adding, setAdding] = useState(false);
@@ -38,32 +37,19 @@ export default function AddCard({ handleAddTask, status }) {
           Add Card
         </Typography>
       ) : (
-        <Box>
-          <TextField
-            fullWidth
-            id="fullWidth"
-            label="Title"
-            variant="outlined"
-            sx={{ mb: 2 }}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            error={error.show}
-            helperText={error.message}
-          />
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography
-              sx={{ fontWeight: "bold", alignSelf: "center" }}
-              variant="body1"
-              color="primary.main"
-              onClick={() => setAdding(false)}
-            >
-              Cancel
-            </Typography>
-            <Button variant="contained" onClick={handleSubmit}>
-              Add
-            </Button>
-          </Box>
-        </Box>
+        <AddButton
+          fullWidth
+          id="fullWidth"
+          label="Title"
+          variant="outlined"
+          sx={{ mb: 2 }}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          error={error.show}
+          helperText={error.message}
+          handleCancel={() => setAdding(false)}
+          handleAdd={handleSubmit}
+        />
       )}
     </Box>
   );
