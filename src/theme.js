@@ -3,16 +3,16 @@ import { createTheme } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#f4f5f7",
-      dark: "rgba(0, 0, 0, 0.1)",
+      main: "#6470cd",
+      dark: "#3d4865",
     },
     secondary: {
       main: "#ffffff",
-      dark: "#f3f1f2",
+      dark: "#f4f5f7",
     },
   },
   typography: {
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Arial, sans-serif",
   },
 });
 

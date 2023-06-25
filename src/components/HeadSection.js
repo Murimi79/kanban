@@ -5,15 +5,20 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 export default function HeadSection() {
   return (
-    <Box sx={{ mb: 3 }}>
-      <Typography sx={{ mb: 1 }} variant="h4">
+    <Box>
+      <Typography sx={{ mb: 1 }} variant="h4" color="primary.dark">
         Kanban
       </Typography>
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
       >
-        <Link underline="hover" color="text.primary" href="/">
+        <Link
+          underline="hover"
+          sx={{ fontWeight: 500 }}
+          color="primary.dark"
+          href="/"
+        >
           Dashboard
         </Link>
         <Typography color="inherit">Kanban</Typography>

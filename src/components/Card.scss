@@ -1,0 +1,10 @@
+.Card {
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  padding: 1rem;
+  cursor: pointer;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+}

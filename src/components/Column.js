@@ -1,23 +1,38 @@
-import { Box, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+
+import AddCard from "./AddCard";
+import ColumnHeader from "./ColumnHeader";
+import Card from "./Card";
 
 export default function Column({ status }) {
-  const { palette } = useTheme();
+  const [tasks, setTasks] = useState([
+    { title: "Create a reusable button component", status: "To-Do" },
+  ]);
+  const columnTasks = tasks.filter((t) => t.status === status);
+
+  function handleAddTask(title) {
+    setTasks([...tasks, { title, status }]);
+  }
+
   return (
     <Box
       sx={{
-        bgcolor: palette.secondary.main,
-        padding: 2,
+        bgcolor: "secondary.main",
         borderRadius: 1,
-        boxShadow: `0 2px 6px ${palette.primary.dark}`,
+        boxShadow: `0 2px 6px rgba(0, 0, 0, 0.1)}`,
       }}
     >
-      <Box sx={{ borderBottom: `1px solid ${palette.primary.main}` }}>
-        <Typography variant="h6">{status}</Typography>
+      <ColumnHeader status={status} />
+      <Divider />
+      <Box sx={{ height: columnTasks.length ? "auto" : 60, padding: 2 }}>
+        {columnTasks.map((task) => (
+          <Card key={task.title} {...task} />
+        ))}
       </Box>
-      <Box sx={{ borderBottom: "1px solid primary.main" }}>
-        <Typography variant="h6">{status}</Typography>
-      </Box>
+      <Divider />
+      <AddCard handleAddTask={handleAddTask} />
     </Box>
   );
 }

@@ -4,7 +4,7 @@ import Kanban from "./kanban";
 
 function App() {
   return (
-    <Box sx={{ bgcolor: "primary.main", height: "100vh", padding: 3 }}>
+    <Box sx={{ bgcolor: "secondary.dark", height: "100vh", padding: 3 }}>
       <HeadSection />
       <Kanban />
     </Box>
