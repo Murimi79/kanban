@@ -8,7 +8,6 @@ export const columnSlice = createSlice({
       state.push(action.payload);
     },
     updateColumn: function (state, { payload: { id, status } }) {
-      console.log(id);
       const columnToUpdate = state.find((c) => c.id === id);
       if (columnToUpdate) {
         columnToUpdate.status = status;
