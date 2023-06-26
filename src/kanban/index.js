@@ -11,7 +11,6 @@ export default function Kanban() {
   function handleAddTask(task) {
     const id = tasks.length + 1;
     const newTask = { ...task, id };
-    console.log(newTask);
     setTasks([...tasks, newTask]);
   }
 
@@ -21,7 +20,6 @@ export default function Kanban() {
 
   function handleDropCard(e, { status, columnId }) {
     const taskId = e.dataTransfer.getData("taskId");
-    console.log(taskId, status);
     const updatedTasks = tasks.map((t) => {
       if (t.id === +taskId) {
         return { ...t, status, columnId };
@@ -59,39 +57,27 @@ export default function Kanban() {
   }
 
   const noOfColumns = columns.length;
-  let size = 12;
-  if (noOfColumns < 5 && noOfColumns !== 1) {
-    size = 9;
-  } else if (noOfColumns === 1) {
-    size = 2;
-  }
 
   return (
     <>
       <Grid sx={{ mt: 5 }} container spacing={2}>
-        {columns.length ? (
-          <Grid item sm={size}>
-            <Grid container spacing={2}>
-              {columns.map(({ status, id }) => (
-                <Grid key={status} item sm={12 / columns.length}>
-                  <Column
-                    tasks={tasks}
-                    status={status}
-                    columnId={id}
-                    handleDragCard={handleDragCard}
-                    handleDropCard={handleDropCard}
-                    handleAddTask={handleAddTask}
-                    handleUpdateColumn={handleUpdateColumn}
-                    handleClear={handleClear}
-                    handleDeleteColumn={handleDeleteColumn}
-                  />
-                </Grid>
-              ))}
-            </Grid>
+        {columns.map(({ status, id }) => (
+          <Grid key={status} item sm={noOfColumns === 5 ? 2.4 : 2}>
+            <Column
+              tasks={tasks}
+              status={status}
+              columnId={id}
+              handleDragCard={handleDragCard}
+              handleDropCard={handleDropCard}
+              handleAddTask={handleAddTask}
+              handleUpdateColumn={handleUpdateColumn}
+              handleClear={handleClear}
+              handleDeleteColumn={handleDeleteColumn}
+            />
           </Grid>
-        ) : null}
+        ))}
         {noOfColumns < 5 ? (
-          <Grid item sm={3}>
+          <Grid item sm={2}>
             <AddColumn handleAddColumn={handleAddColumn} />
           </Grid>
         ) : null}
