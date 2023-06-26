@@ -27,11 +27,16 @@ export default function ColumnHeader({
     setOpen((previousOpen) => !previousOpen);
   }
 
+  function clear(columnId) {
+    handleClear(columnId);
+    setOpen(false);
+  }
+
   function handleOption(option) {
     if (option === "Rename") {
       setEditing(true);
     } else if (option === "Clear") {
-      handleClear(columnId);
+      clear(columnId);
     } else if (option === "Delete") {
       handleDeleteColumn(columnId);
     }
