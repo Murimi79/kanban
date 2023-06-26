@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import columnReducer from "./components/columnSlice";
-import taskReducer from "./components/taskSlice";
+import columnReducer from "./features/columnSlice";
+import taskReducer from "./features/taskSlice";
 
 export default configureStore({
   reducer: {

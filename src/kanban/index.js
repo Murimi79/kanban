@@ -3,12 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Column from "../components/Column";
 import AddColumn from "../components/AddColumn";
-import {
-  addColumn,
-  deleteColumn,
-  updateColumn,
-} from "../components/columnSlice";
-import { addTask, clearTasks, updateTaskColumn } from "../components/taskSlice";
+import { addColumn, deleteColumn, updateColumn } from "../features/columnSlice";
+import { addTask, clearTasks, updateTaskColumn } from "../features/taskSlice";
 
 export default function Kanban() {
   const columns = useSelector((state) => state.column);
