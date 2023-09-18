@@ -1,3 +1,4 @@
+import React from "react";
 import Popper from "@mui/material/Popper";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
@@ -6,7 +7,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
-export default function Menu({ open, anchorEl, onClick }) {
+interface MenuProps {
+  open: boolean;
+  onClick: 
+}
+
+export default function Menu({ open, anchorEl, onClick }: MenuProps) {
   const canBeOpen = open && Boolean(anchorEl);
   const id = canBeOpen ? "transition-popper" : undefined;
 

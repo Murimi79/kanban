@@ -1,13 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+interface ColumnState {
+  status: string;
+  id: number;
+}
+export type ColumnType = Array<ColumnState>;
+
+const initialState: ColumnType = [];
 
 export const columnSlice = createSlice({
   name: "column",
-  initialState: [],
+  initialState,
   reducers: {
     addColumn: function (state, action) {
       state.push(action.payload);
     },
-    updateColumn: function (state, { payload: { id, status } }) {
+    updateColumn: function (
+      state,
+      { payload: { id, status } }: PayloadAction<{ id: number; status: string }>
+    ) {
       const columnToUpdate = state.find((c) => c.id === id);
       if (columnToUpdate) {
         columnToUpdate.status = status;

@@ -1,15 +1,25 @@
+import React from "react";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import AddButton from "./common/AddForm";
+import { useDispatch } from "react-redux";
 
-export default function AddCard({ handleAddTask, status, columnId }) {
+import AddButton from "./common/AddForm";
+import { addTask } from "../features/taskSlice";
+
+interface AddCardProps {
+  status: string;
+  columnId: number;
+}
+
+export default function AddCard({ status, columnId }: AddCardProps) {
   const [adding, setAdding] = useState(false);
   const [title, setTitle] = useState("");
   const [error, setError] = useState({
     show: false,
     message: "",
   });
+  const dispatch = useDispatch();
 
   function handleAddCard() {
     setAdding(true);
@@ -22,7 +32,7 @@ export default function AddCard({ handleAddTask, status, columnId }) {
     }
 
     const task = { title, status, columnId };
-    handleAddTask(task);
+    dispatch(addTask(task));
     setAdding(false);
     setTitle("");
   }
@@ -46,7 +56,9 @@ export default function AddCard({ handleAddTask, status, columnId }) {
           variant="outlined"
           sx={{ mb: 2 }}
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTitle(e.target.value)
+          }
           error={error.show}
           helperText={error.message}
           handleCancel={() => setAdding(false)}

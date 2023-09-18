@@ -1,14 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+interface TaskState {
+  columnId: number;
+  id: number;
+}
+
+export type TaskType = Array<TaskState>;
+const initialState: TaskType = [];
 
 export const taskSlice = createSlice({
   name: "task",
-  initialState: [],
+  initialState,
   reducers: {
     addTask: function (state, action) {
       action.payload.id = state.length + 1;
       state.push(action.payload);
     },
-    clearTasks: function (state, action) {
+    clearTasks: function (state, action: PayloadAction<number>) {
       return state.filter((t) => t.columnId !== action.payload);
     },
     updateTaskColumn: function (

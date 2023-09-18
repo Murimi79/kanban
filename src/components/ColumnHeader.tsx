@@ -6,13 +6,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AddForm from "./common/AddForm";
 import Menu from "./common/Menu";
 
-export default function ColumnHeader({
-  status,
-  handleUpdateColumn,
-  columnId,
-  handleClear,
-  handleDeleteColumn,
-}) {
+export default function ColumnHeader({ status, columnId }) {
   const [editing, setEditing] = useState(false);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);

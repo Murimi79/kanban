@@ -1,8 +1,18 @@
+import React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "./Card.scss";
 
-export default function Card({ id, title, handleDragCard }) {
+interface Props {
+  title: string;
+  id: number;
+}
+
+export default function Card({ id, title }: Props) {
+  function handleDragCard(e: any, taskId: number) {
+    e.dataTransfer.setData("taskId", taskId);
+  }
+
   return (
     <Box
       className="Card"

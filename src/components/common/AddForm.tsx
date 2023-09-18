@@ -1,3 +1,4 @@
+import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,7 +9,7 @@ export default function AddForm({
   handleCancel,
   buttonName = "Add",
   ...props
-}) {
+}): Props {
   return (
     <Box>
       <TextField

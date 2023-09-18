@@ -1,3 +1,4 @@
+import React from "react";
 import { Box } from "@mui/material";
 import HeadSection from "./components/HeadSection";
 import Kanban from "./kanban";
