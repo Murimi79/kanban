@@ -26,7 +26,8 @@ export default function AddCard({ status, columnId }: AddCardProps) {
   }
 
   function handleSubmit() {
-    if (!title.trim()) {
+    const tit = title.trim();
+    if (!tit) {
       setError({ ...error, show: true, message: "Title is required." });
       return;
     }
