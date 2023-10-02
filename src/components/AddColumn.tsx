@@ -24,7 +24,8 @@ export default function AddColumn({ columns }: Props) {
   }
 
   function handleSubmit() {
-    if (!name) {
+    const title = name.trim();
+    if (!title) {
       setError({ ...error, show: true, message: "Title is required." });
       return;
     }
