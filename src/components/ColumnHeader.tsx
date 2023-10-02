@@ -1,38 +1,47 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import AddForm from "./common/AddForm";
 import Menu from "./common/Menu";
+import { useAppDispatch } from "../hooks";
+import { deleteColumn, updateColumn } from "../features/columnSlice";
+import { clearTasks } from "../features/taskSlice";
 
-export default function ColumnHeader({ status, columnId }) {
+interface Props {
+  status: string;
+  columnId: number;
+}
+
+export default function ColumnHeader({ status, columnId }: Props) {
   const [editing, setEditing] = useState(false);
   const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<null | SVGSVGElement>(null);
   const [name, setName] = useState(status);
   const [error, setError] = useState({
     show: false,
     message: "",
   });
+  const dispatch = useAppDispatch();
 
-  function handleClick(e) {
+  function handleClick(e: React.MouseEvent<SVGSVGElement | null>) {
     setAnchorEl(e.currentTarget);
     setOpen((previousOpen) => !previousOpen);
   }
 
-  function clear(columnId) {
-    handleClear(columnId);
+  function clear(columnId: number) {
+    dispatch(clearTasks(columnId));
     setOpen(false);
   }
 
-  function handleOption(option) {
+  function handleOption(option: string) {
     if (option === "Rename") {
       setEditing(true);
     } else if (option === "Clear") {
       clear(columnId);
     } else if (option === "Delete") {
-      handleDeleteColumn(columnId);
+      dispatch(deleteColumn(columnId));
     }
   }
 
@@ -42,7 +51,7 @@ export default function ColumnHeader({ status, columnId }) {
       return;
     }
 
-    handleUpdateColumn({ status: name, id: columnId });
+    dispatch(updateColumn({ status: name, id: columnId }));
     setEditing(false);
     setOpen(false);
   }
@@ -68,11 +77,7 @@ export default function ColumnHeader({ status, columnId }) {
           >
             {status}
           </Typography>
-          <MoreHorizIcon
-            color="primary.dark"
-            sx={{ cursor: "pointer" }}
-            onClick={handleClick}
-          />
+          <MoreHorizIcon sx={{ cursor: "pointer" }} onClick={handleClick} />
           {open ? (
             <Menu open={open} anchorEl={anchorEl} onClick={handleOption} />
           ) : null}

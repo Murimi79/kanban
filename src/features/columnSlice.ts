@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface ColumnState {
+export interface Column {
   status: string;
   id: number;
 }
-export type ColumnType = Array<ColumnState>;
+export type ColumnType = Array<Column>;
 
 const initialState: ColumnType = [];
 
@@ -12,7 +12,10 @@ export const columnSlice = createSlice({
   name: "column",
   initialState,
   reducers: {
-    addColumn: function (state, action) {
+    addColumn: function (
+      state,
+      action: PayloadAction<{ status: string; id: number }>
+    ) {
       state.push(action.payload);
     },
     updateColumn: function (
@@ -24,7 +27,7 @@ export const columnSlice = createSlice({
         columnToUpdate.status = status;
       }
     },
-    deleteColumn: function (state, { payload }) {
+    deleteColumn: function (state, { payload }: PayloadAction<number>) {
       return state.filter((c) => c.id !== payload);
     },
   },

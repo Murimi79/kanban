@@ -21,7 +21,9 @@ export const taskSlice = createSlice({
     },
     updateTaskColumn: function (
       state,
-      { payload: { status, columnId, taskId } }
+      {
+        payload: { status, columnId, taskId },
+      }: PayloadAction<{ status: string; columnId: number; taskId: string }>
     ) {
       return state.map((t) => {
         if (t.id === +taskId) {

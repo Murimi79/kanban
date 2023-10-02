@@ -1,15 +1,29 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import TextField, { TextFieldVariants } from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+
+interface Props {
+  handleAdd: () => void;
+  handleCancel: () => void;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: boolean;
+  helperText: string;
+  buttonName?: string;
+  fullWidth?: boolean;
+  id?: string;
+  label?: string;
+  variant?: TextFieldVariants;
+}
 
 export default function AddForm({
   handleAdd,
   handleCancel,
   buttonName = "Add",
   ...props
-}): Props {
+}: Props) {
   return (
     <Box>
       <TextField

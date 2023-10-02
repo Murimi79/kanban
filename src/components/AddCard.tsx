@@ -54,7 +54,6 @@ export default function AddCard({ status, columnId }: AddCardProps) {
           id="fullWidth"
           label="Title"
           variant="outlined"
-          sx={{ mb: 2 }}
           value={title}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setTitle(e.target.value)

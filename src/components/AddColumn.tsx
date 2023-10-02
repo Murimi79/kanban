@@ -4,12 +4,16 @@ import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import AddForm from "./common/AddForm";
 import { useDispatch } from "react-redux";
-import { addColumn } from "../features/columnSlice";
+import { Column, addColumn } from "../features/columnSlice";
 
-export default function AddColumn({ columns }) {
+interface Props {
+  columns: Array<Column>;
+}
+
+export default function AddColumn({ columns }: Props) {
   const [adding, setAdding] = useState(false);
-  const [name, setName] = useState("");
-  const [error, setError] = useState({
+  const [name, setName] = useState<string>("");
+  const [error, setError] = useState<{ show: boolean; message: string }>({
     show: false,
     message: "",
   });
@@ -25,7 +29,7 @@ export default function AddColumn({ columns }) {
       return;
     }
 
-    dispatch(addColumn({ name, id: columns.length + 1 }));
+    dispatch(addColumn({ status: name, id: columns.length + 1 }));
     setAdding(false);
     setName("");
   }

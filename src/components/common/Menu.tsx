@@ -9,7 +9,8 @@ import ListItemText from "@mui/material/ListItemText";
 
 interface MenuProps {
   open: boolean;
-  onClick: 
+  onClick: (o: string) => void;
+  anchorEl: null | SVGSVGElement;
 }
 
 export default function Menu({ open, anchorEl, onClick }: MenuProps) {

@@ -17,12 +17,15 @@ export default function Column({ status, columnId }: ColumnProps) {
   const tasks = useAppSelector((state) => state.task);
   const dispatch = useAppDispatch();
 
-  function handleDropCard(e, { status, columnId }: ColumnProps) {
+  function handleDropCard(
+    e: React.DragEvent<HTMLElement>,
+    { status, columnId }: ColumnProps
+  ) {
     const taskId = e.dataTransfer.getData("taskId");
     dispatch(updateTaskColumn({ taskId, status, columnId }));
   }
 
-  function handleDragOver(e) {
+  function handleDragOver(e: React.DragEvent<HTMLElement>) {
     e.preventDefault();
   }
 
@@ -44,7 +47,7 @@ export default function Column({ status, columnId }: ColumnProps) {
         sx={{ height: columnTasks.length ? "auto" : 60, padding: 2 }}
       >
         {columnTasks.map((task) => (
-          <Card key={task.id} {...task} />
+          <Card key={task.id} title="" {...task} />
         ))}
       </Box>
       <Divider />
