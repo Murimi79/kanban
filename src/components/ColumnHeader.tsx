@@ -46,7 +46,8 @@ export default function ColumnHeader({ status, columnId }: Props) {
   }
 
   function handleUpdate() {
-    if (!name) {
+    const title = name.trim();
+    if (!title) {
       setError({ ...error, show: true, message: "Title is required." });
       return;
     }
