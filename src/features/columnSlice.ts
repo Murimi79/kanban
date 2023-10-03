@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface Column {
   status: string;
-  id: number;
+  id: string;
 }
 export type ColumnType = Array<Column>;
 
@@ -14,20 +14,20 @@ export const columnSlice = createSlice({
   reducers: {
     addColumn: function (
       state,
-      action: PayloadAction<{ status: string; id: number }>
+      action: PayloadAction<{ status: string; id: string }>
     ) {
       state.push(action.payload);
     },
     updateColumn: function (
       state,
-      { payload: { id, status } }: PayloadAction<{ id: number; status: string }>
+      { payload: { id, status } }: PayloadAction<{ id: string; status: string }>
     ) {
       const columnToUpdate = state.find((c) => c.id === id);
       if (columnToUpdate) {
         columnToUpdate.status = status;
       }
     },
-    deleteColumn: function (state, { payload }: PayloadAction<number>) {
+    deleteColumn: function (state, { payload }: PayloadAction<string>) {
       return state.filter((c) => c.id !== payload);
     },
   },

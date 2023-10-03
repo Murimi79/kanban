@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import AddForm from "./common/AddForm";
 import { Column, addColumn } from "../features/columnSlice";
 import { useAppDispatch } from "../hooks";
+import { generateUniqueId } from "../utility";
 
 interface Props {
   columns: Array<Column>;
@@ -39,7 +40,8 @@ export default function AddColumn({ columns }: Props) {
       return;
     }
 
-    dispatch(addColumn({ status: name, id: columns.length + 1 }));
+    const id = generateUniqueId();
+    dispatch(addColumn({ status: name, id }));
     setAdding(false);
     setName("");
   }

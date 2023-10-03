@@ -9,7 +9,7 @@ import { addTask } from "../features/taskSlice";
 
 interface AddCardProps {
   status: string;
-  columnId: number;
+  columnId: string;
 }
 
 export default function AddCard({ status, columnId }: AddCardProps) {

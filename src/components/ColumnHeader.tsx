@@ -11,7 +11,7 @@ import { clearTasks } from "../features/taskSlice";
 
 interface Props {
   status: string;
-  columnId: number;
+  columnId: string;
 }
 
 export default function ColumnHeader({ status, columnId }: Props) {
@@ -30,7 +30,7 @@ export default function ColumnHeader({ status, columnId }: Props) {
     setOpen((previousOpen) => !previousOpen);
   }
 
-  function clear(columnId: number) {
+  function clear(columnId: string) {
     dispatch(clearTasks(columnId));
     setOpen(false);
   }
@@ -42,6 +42,7 @@ export default function ColumnHeader({ status, columnId }: Props) {
       clear(columnId);
     } else if (option === "Delete") {
       dispatch(deleteColumn(columnId));
+      clear(columnId);
     }
   }
 

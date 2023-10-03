@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 
 interface ColumnProps {
   status: string;
-  columnId: number;
+  columnId: string;
 }
 
 export default function Column({ status, columnId }: ColumnProps) {

@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface TaskState {
-  columnId: number;
+  columnId: string;
   id: number;
 }
 
@@ -16,14 +16,14 @@ export const taskSlice = createSlice({
       action.payload.id = state.length + 1;
       state.push(action.payload);
     },
-    clearTasks: function (state, action: PayloadAction<number>) {
+    clearTasks: function (state, action: PayloadAction<string>) {
       return state.filter((t) => t.columnId !== action.payload);
     },
     updateTaskColumn: function (
       state,
       {
         payload: { status, columnId, taskId },
-      }: PayloadAction<{ status: string; columnId: number; taskId: string }>
+      }: PayloadAction<{ status: string; columnId: string; taskId: string }>
     ) {
       return state.map((t) => {
         if (t.id === +taskId) {
