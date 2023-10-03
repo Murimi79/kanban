@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
+
 import AddForm from "./common/AddForm";
 import { useDispatch } from "react-redux";
 import { Column, addColumn } from "../features/columnSlice";
+import { useAppSelector } from "../hooks";
 
 interface Props {
   columns: Array<Column>;
@@ -21,12 +23,21 @@ export default function AddColumn({ columns }: Props) {
 
   function handleAdd() {
     setAdding(true);
+    setError({ ...error, show: false, message: "" });
   }
 
   function handleSubmit() {
     const title = name.trim();
     if (!title) {
       setError({ ...error, show: true, message: "Title is required." });
+      return;
+    }
+
+    const exists = columns.find((c) => c.status === title);
+    console.log(columns);
+
+    if (exists) {
+      setError({ ...error, show: true, message: "Title already exists." });
       return;
     }
 

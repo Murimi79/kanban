@@ -30,6 +30,7 @@ export default function Column({ status, columnId }: ColumnProps) {
   }
 
   const columnTasks = tasks.filter((t) => t.columnId === columnId);
+  console.log(tasks);
 
   return (
     <Box
