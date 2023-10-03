@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 
 import AddForm from "./common/AddForm";
 import { Column, addColumn } from "../features/columnSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch } from "../hooks";
 
 interface Props {
   columns: Array<Column>;
