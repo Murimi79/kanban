@@ -5,7 +5,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import AddForm from "./common/AddForm";
 import Menu from "./common/Menu";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { deleteColumn, updateColumn } from "../features/columnSlice";
 import { clearTasks } from "../features/taskSlice";
 
@@ -24,6 +24,7 @@ export default function ColumnHeader({ status, columnId }: Props) {
     message: "",
   });
   const dispatch = useAppDispatch();
+  const columns = useAppSelector((state) => state.column);
 
   function handleClick(e: React.MouseEvent<SVGSVGElement | null>) {
     setAnchorEl(e.currentTarget);
@@ -50,6 +51,12 @@ export default function ColumnHeader({ status, columnId }: Props) {
     const title = name.trim();
     if (!title) {
       setError({ ...error, show: true, message: "Title is required." });
+      return;
+    }
+
+    const exists = columns.find((c) => c.id !== columnId && c.status === name);
+    if (exists) {
+      setError({ ...error, show: true, message: "Title already exists." });
       return;
     }
 
