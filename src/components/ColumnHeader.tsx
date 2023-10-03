@@ -68,6 +68,7 @@ export default function ColumnHeader({ status, columnId }: Props) {
   function handleCancel() {
     setEditing(false);
     setOpen(false);
+    setName(status);
   }
 
   return (
